@@ -89,18 +89,11 @@
                     android:inputType="text"
                     android:ems="10"
                     android:id="@+id/tvLatPos1"
-                    android:hint="Latitude"
-                    android:layout_weight="1"
+                    android:hint="Start"
+                    android:layout_weight="2"
                     android:layout_marginRight="5dp" />
 
-            <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:ems="10"
-                    android:id="@+id/tvLngPos1"
-                    android:hint="Longitude"
-                    android:layout_weight="1" />
+
 
         </LinearLayout>
 
@@ -122,18 +115,10 @@
                     android:inputType="text"
                     android:ems="10"
                     android:id="@+id/tvLatPos2"
-                    android:hint="Latitude"
-                    android:layout_weight="1"
+                    android:hint="Destination"
+                    android:layout_weight="2"
                     android:layout_marginRight="5dp" />
 
-            <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:ems="10"
-                    android:id="@+id/tvLngPos2"
-                    android:hint="Longitude"
-                    android:layout_weight="1" />
         </LinearLayout>
 
         <TextView

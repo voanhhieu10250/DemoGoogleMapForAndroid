@@ -1,5 +1,7 @@
 package com.example.demogooglemap;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -29,6 +31,7 @@ import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.TravelMode;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,9 +59,9 @@ public class MainActivity2 extends AppCompatActivity implements OnMapReadyCallba
 
         mMapView = findViewById(R.id.mapView);
         tvLatPos1 = findViewById(R.id.tvLatPos1);
-        tvLngPos1 = findViewById(R.id.tvLngPos1);
+//        tvLngPos1 = findViewById(R.id.tvLngPos1);
         tvLatPos2 = findViewById(R.id.tvLatPos2);
-        tvLngPos2 = findViewById(R.id.tvLngPos2);
+//        tvLngPos2 = findViewById(R.id.tvLngPos2);
         btnBus = findViewById(R.id.btnBus);
         btnCar = findViewById(R.id.btnCar);
         tvDistance = findViewById(R.id.tvDistance);
@@ -89,8 +92,8 @@ public class MainActivity2 extends AppCompatActivity implements OnMapReadyCallba
             googleMap.clear();
             clearResultViews();
 
-            LatLng pos1 = getLatLngFromTextView(tvLatPos1, tvLngPos1);
-            LatLng pos2 = getLatLngFromTextView(tvLatPos2, tvLngPos2);
+            LatLng pos1 = onQueryTextSubmit(tvLatPos1.getText().toString());
+            LatLng pos2 = onQueryTextSubmit(tvLatPos2.getText().toString());
             if (pos1 == null || pos2 == null) return;
 
             addMarkers(googleMap, pos1, pos2);
@@ -253,5 +256,22 @@ public class MainActivity2 extends AppCompatActivity implements OnMapReadyCallba
                 polylineData.getPolyline().setZIndex(0);
             }
         }
+    }
+
+
+    public LatLng onQueryTextSubmit(String location) {
+        List<Address> addressList = null;
+        LatLng latLng = null;
+        if (location != null) {
+            Geocoder geocoder = new Geocoder(MainActivity2.this);
+            try {
+                addressList = geocoder.getFromLocationName(location, 1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Address address = addressList.get(0);
+            latLng = new LatLng(address.getLatitude(), address.getLongitude());
+        }
+        return latLng;
     }
 }
